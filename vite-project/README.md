@@ -1,3 +1,3 @@
-![Component Diagram](public/Diagram.png)
+![Component Diagram](public/Diagram_Lab_5-6.png)
 
-Опис діаграми: Діаграма показує структуру компонентів React-додатку "To-Do List". App.jsx рендерить TodoList.jsx, який керує станом задач (todos) і передає функції через props до AddTodoForm.jsx та TodoItem.jsx. У кожному компоненті показано локальний state, а стрілки з підписами демонструють передачу callback-функцій між компонентами.
+Опис діаграми: Діаграма показує структуру компонентів React-додатку "To-Do List". App.jsx рендерить TodoList.jsx, який виступає як контейнер і керує станом задач (todos), пошуку (searchTerm), пагінації (currentPage, limitPerPage) та передає callback-функції через props до дочірніх компонентів: AddTodoForm.jsx, TodoItem.jsx, SearchBar.jsx, Pagination.jsx. У кожному компоненті показано локальний state, а стрілки з підписами демонструють передачу функцій для додавання, редагування, видалення, пошуку та навігації між сторінками.
