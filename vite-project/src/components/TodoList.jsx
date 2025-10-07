@@ -1,52 +1,57 @@
-import { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoItem from "./TodoItem";
+import SearchBar from "./SearchBar";
+import Pagination from "./Pagination";
+import { useTodos } from "../hooks/useTodos";
 import "./../styles/Todo.css";
 
 function TodoList() {
-  const [todos, setTodos] = useState([]);
-
-  const handleAddTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      todo: text,
-      completed: false,
-    };
-    setTodos((prev) => [...prev, newTodo]);
-  };
-
-  const handleDeleteTodo = (id) => {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
-  };
-
-  const handleToggleTodo = (id) => {
-    setTodos((prev) =>
-      prev.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-  const handleUpdateTodo = (id, newText) => {
-  setTodos((prev) =>
-    prev.map((todo) => (todo.id === id ? { ...todo, todo: newText } : todo))
-  );
-};
+  const {
+    todos,
+    isLoading,
+    error,
+    addTodo,
+    deleteTodo,
+    toggleTodo,
+    editTodoTitle,
+    searchTerm,
+    setSearchTerm,
+    currentPage,
+    totalTodos,
+    limitPerPage,
+    goToNextPage,
+    goToPrevPage,
+  } = useTodos();
 
   return (
     <div className="container">
       <h1>To-Do List</h1>
-      <AddTodoForm onAddTodo={handleAddTodo} />
+
+      <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
+      <AddTodoForm onAddTodo={addTodo} />
+
+      {isLoading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
       <ul>
         {todos.map((todo) => (
           <TodoItem
-  key={todo.id}
-  task={todo}
-  onDelete={handleDeleteTodo}
-  onToggle={handleToggleTodo}
-  onUpdate={handleUpdateTodo}
-/>
+            key={todo.id}
+            task={todo}
+            onDelete={deleteTodo}
+            onToggle={toggleTodo}
+            onEdit={editTodoTitle}
+          />
         ))}
       </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalTodos={totalTodos}
+        limitPerPage={limitPerPage}
+        onNext={goToNextPage}
+        onPrev={goToPrevPage}
+      />
     </div>
   );
 }
