@@ -1,3 +1,4 @@
+import { memo } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoItem from "./TodoItem";
 import SearchBar from "./SearchBar";

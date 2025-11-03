@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 
 function TodoItem({ task, onDelete, onToggle, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -67,4 +67,15 @@ function TodoItem({ task, onDelete, onToggle, onEdit }) {
   );
 }
 
-export default TodoItem;
+function arePropsEqual(prevProps, nextProps) {
+  return (
+    prevProps.task.id === nextProps.task.id &&
+    prevProps.task.todo === nextProps.task.todo &&
+    prevProps.task.completed === nextProps.task.completed &&
+    prevProps.onDelete === nextProps.onDelete &&
+    prevProps.onToggle === nextProps.onToggle &&
+    prevProps.onEdit === nextProps.onEdit
+  );
+}
+
+export default memo(TodoItem, arePropsEqual);

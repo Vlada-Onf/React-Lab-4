@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function Pagination({ currentPage, totalTodos, limitPerPage, onNext, onPrev }) {
   const totalPages = Math.ceil(totalTodos / limitPerPage);
 
@@ -16,4 +18,4 @@ function Pagination({ currentPage, totalTodos, limitPerPage, onNext, onPrev }) {
   );
 }
 
-export default Pagination;
+export default memo(Pagination);

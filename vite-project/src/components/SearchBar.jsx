@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function SearchBar({ searchTerm, onSearch }) {
   return (
     <div style={{ marginBottom: "20px", textAlign: "center" }}>
@@ -18,4 +20,4 @@ function SearchBar({ searchTerm, onSearch }) {
   );
 }
 
-export default SearchBar;
+export default memo(SearchBar);
